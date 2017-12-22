@@ -1,6 +1,7 @@
 package fraglab.net.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import fraglab.net.myapplication.zxing.IntentIntegrator;
+import fraglab.net.myapplication.zxing.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public void resetClick(View view) {
         setProgressBarVisibility(View.INVISIBLE);
         EditText isbnEdit = findViewById(R.id.input_isbn_id);
+        isbnEdit.setText("");
         bindText(R.id.value_isbn_id, "");
         bindText(R.id.value_title_id, "");
         bindText(R.id.value_author_id, "");
@@ -91,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected BookInformation doInBackground(String... params) {
             try {
-                final String url = String.format("http://192.168.1.19:8080/bookproject/search?isbn=%s", params[0]);
+                final String url = String.format("http://192.168.1.19:8080/bookproject/search?isbn=%s&provider=biblionet", params[0]);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 return restTemplate.getForObject(url, BookInformation.class);
@@ -117,6 +122,20 @@ public class MainActivity extends AppCompatActivity {
     private void bindText(int id, String text) {
         TextView textView = findViewById(id);
         textView.setText(text);
+    }
+
+    public void scan(View v) {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.initiateScan();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null) {
+            EditText isbnEdit = findViewById(R.id.input_isbn_id);
+            isbnEdit.setText(scanResult.getContents());
+            this.okClick(isbnEdit);
+        }
     }
 
 }

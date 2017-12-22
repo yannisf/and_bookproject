@@ -13,47 +13,59 @@
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/input_isbn_id"
-            android:layout_width="0dp"
+            android:layout_width="174dp"
             android:layout_height="46dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="text"
             android:text="9789600338980"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_ok_id"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="9789600338980" />
 
         <Button
             android:id="@+id/button_reset_id"
-            android:layout_width="70dp"
+            android:layout_width="64dp"
             android:layout_height="46dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:onClick="resetClick"
             android:text="@string/reset"
+            android:textSize="13sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/button3"
+            app:layout_constraintStart_toEndOf="@+id/button3" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="64dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="8dp"
+            android:onClick="scan"
+            android:text="SCAN"
+            android:textSize="13sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/button_ok_id"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/button_ok_id" />
 
         <Button
             android:id="@+id/button_ok_id"
-            android:layout_width="70dp"
+            android:layout_width="50dp"
             android:layout_height="46dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:onClick="okClick"
             android:text="@string/ok"
             app:layout_constraintBaseline_toBaselineOf="@+id/input_isbn_id"
-            app:layout_constraintEnd_toStartOf="@+id/button_reset_id" />
+            app:layout_constraintStart_toEndOf="@+id/input_isbn_id" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
