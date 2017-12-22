@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("MainActivity", e.getMessage(), e);
             }
 
-            return null;
+            return new BookInformation();
         }
 
         @Override

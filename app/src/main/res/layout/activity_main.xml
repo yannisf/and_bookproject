@@ -4,170 +4,220 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fraglab.net.myapplication.MainActivity">
+    tools:context="fraglab.net.myapplication.MainActivity"
+    tools:layout_editor_absoluteY="81dp">
 
-    <EditText
-        android:id="@+id/input_isbn_id"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/controls_layout_id"
         android:layout_width="0dp"
-        android:layout_height="46dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="9789600338980"
-        app:layout_constraintEnd_toStartOf="@+id/button_ok_id"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="9789600338980" />
-
-    <Button
-        android:id="@+id/button_ok_id"
-        android:layout_width="70dp"
-        android:layout_height="46dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="8dp"
-        android:onClick="okClick"
-        android:text="@string/ok"
-        app:layout_constraintBaseline_toBaselineOf="@+id/input_isbn_id"
-        app:layout_constraintEnd_toStartOf="@+id/button_reset_id" />
-
-    <Button
-        android:id="@+id/button_reset_id"
-        android:layout_width="70dp"
-        android:layout_height="46dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="resetClick"
-        android:text="@string/reset"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button_ok_id"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/label_isbn_id"
-        android:layout_width="@dimen/label_width"
-        android:layout_height="@dimen/label_height"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/label_isbn"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_progress_bar_id" />
-
-    <TextView
-        android:id="@+id/label_title_id"
-        android:layout_width="@dimen/label_width"
-        android:layout_height="@dimen/label_height"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/label_title"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_isbn_id" />
-
-    <TextView
-        android:id="@+id/value_isbn_id"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/label_height"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="..."
-        app:layout_constraintBaseline_toBaselineOf="@+id/label_isbn_id"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/label_isbn_id" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/value_title_id"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/label_height"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="..."
-        app:layout_constraintBaseline_toBaselineOf="@+id/label_title_id"
+        <EditText
+            android:id="@+id/input_isbn_id"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="9789600338980"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_ok_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="9789600338980" />
+
+        <Button
+            android:id="@+id/button_reset_id"
+            android:layout_width="70dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="resetClick"
+            android:text="@string/reset"
+            app:layout_constraintBaseline_toBaselineOf="@+id/button_ok_id"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/button_ok_id"
+            android:layout_width="70dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="okClick"
+            android:text="@string/ok"
+            app:layout_constraintBaseline_toBaselineOf="@+id/input_isbn_id"
+            app:layout_constraintEnd_toStartOf="@+id/button_reset_id" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/loader_layout_id"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/label_title_id" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/controls_layout_id">
 
-    <TextView
-        android:id="@+id/label_author_id"
-        android:layout_width="@dimen/label_width"
+        <ProgressBar
+            android:id="@+id/search_progress_bar_id"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/label_author"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_title_id" />
-
-    <TextView
-        android:id="@+id/label_publisher_id"
-        android:layout_width="@dimen/label_width"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/label_publisher"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_author_id" />
-
-    <TextView
-        android:id="@+id/label_source_url_id"
-        android:layout_width="@dimen/label_width"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/label_source_url"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_publisher_id" />
-
-    <TextView
-        android:id="@+id/value_author_id"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/label_height"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="..."
-        app:layout_constraintBaseline_toBaselineOf="@+id/label_author_id"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/label_author_id" />
-
-    <TextView
-        android:id="@+id/value_publisher_id"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/label_height"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="..."
-        app:layout_constraintBaseline_toBaselineOf="@+id/label_publisher_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/label_publisher_id" />
-
-    <TextView
-        android:id="@+id/value_source_url_id"
-        android:layout_width="305dp"
-        android:layout_height="18dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:autoLink="web"
-        android:text="..."
-        app:layout_constraintBaseline_toBaselineOf="@+id/label_source_url_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/label_source_url_id" />
-
-    <ProgressBar
-        android:id="@+id/search_progress_bar_id"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_isbn_id" />
+        app:layout_constraintTop_toBottomOf="@+id/loader_layout_id">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/results_layout_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="172dp">
+
+            <TextView
+                android:id="@+id/value_isbn_id"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/label_height"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="..."
+                app:layout_constraintBaseline_toBaselineOf="@+id/label_isbn_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/label_isbn_id" />
+
+            <TextView
+                android:id="@+id/label_isbn_id"
+                android:layout_width="@dimen/label_width"
+                android:layout_height="@dimen/label_height"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/label_isbn"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/label_publisher_id"
+                android:layout_width="@dimen/label_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/label_publisher"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_author_id" />
+
+            <TextView
+                android:id="@+id/label_source_url_id"
+                android:layout_width="@dimen/label_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/label_source_url"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_publisher_id" />
+
+            <TextView
+                android:id="@+id/value_author_id"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/label_height"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="..."
+                app:layout_constraintBaseline_toBaselineOf="@+id/label_author_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/label_author_id" />
+
+            <TextView
+                android:id="@+id/label_title_id"
+                android:layout_width="@dimen/label_width"
+                android:layout_height="@dimen/label_height"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/label_title"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_isbn_id" />
+
+            <TextView
+                android:id="@+id/label_author_id"
+                android:layout_width="@dimen/label_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/label_author"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_title_id" />
+
+            <TextView
+                android:id="@+id/value_title_id"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/label_height"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="..."
+                app:layout_constraintBaseline_toBaselineOf="@+id/label_title_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/label_title_id" />
+
+            <TextView
+                android:id="@+id/value_publisher_id"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/label_height"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="..."
+                app:layout_constraintBaseline_toBaselineOf="@+id/label_publisher_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/label_publisher_id" />
+
+            <TextView
+                android:id="@+id/value_source_url_id"
+                android:layout_width="296dp"
+                android:layout_height="247dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:autoLink="web"
+                android:text="..."
+                app:layout_constraintBaseline_toBaselineOf="@+id/label_source_url_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/label_source_url_id" />
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
