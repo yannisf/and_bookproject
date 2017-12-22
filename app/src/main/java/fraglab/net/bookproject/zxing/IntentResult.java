@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package fraglab.net.myapplication.zxing;
-
-import fraglab.net.myapplication.zxing.IntentIntegrator;
+package fraglab.net.bookproject.zxing;
 
 /**
  * <p>Encapsulates the result of a barcode scan invoked through {@link IntentIntegrator}.</p>

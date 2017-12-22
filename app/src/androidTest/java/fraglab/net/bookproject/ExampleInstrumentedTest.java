@@ -1,4 +1,4 @@
-package fraglab.net.myapplication;
+package fraglab.net.bookproject;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

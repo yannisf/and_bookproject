@@ -1,4 +1,4 @@
-package fraglab.net.myapplication;
+package fraglab.net.bookproject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +15,8 @@ import android.widget.TextView;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import fraglab.net.myapplication.zxing.IntentIntegrator;
-import fraglab.net.myapplication.zxing.IntentResult;
+import fraglab.net.bookproject.zxing.IntentIntegrator;
+import fraglab.net.bookproject.zxing.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -8,4 +8,5 @@
     <string name="label_author" >Author</string>
     <string name="label_publisher">Publisher</string>
     <string name="label_source_url">URL</string>
+    <string name="scan">Scan</string>
 </resources>

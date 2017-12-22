@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package fraglab.net.myapplication.zxing;
+package fraglab.net.bookproject.zxing;
 
 import android.app.Activity;
 import android.app.AlertDialog;

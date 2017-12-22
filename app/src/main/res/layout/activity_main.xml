@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fraglab.net.myapplication.MainActivity"
+    tools:context="fraglab.net.bookproject.MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
     <android.support.constraint.ConstraintLayout
@@ -27,13 +27,15 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
+            android:hint="@string/ISBN"
             android:inputType="text"
-            android:text="9789600338980"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="9789600338980" />
+            tools:text="ISBN" />
 
         <Button
             android:id="@+id/button_reset_id"
@@ -43,16 +45,16 @@
             android:onClick="resetClick"
             android:text="@string/reset"
             android:textSize="13sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/button3"
-            app:layout_constraintStart_toEndOf="@+id/button3" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/button_scan_id"
+            app:layout_constraintStart_toEndOf="@+id/button_scan_id" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button_scan_id"
             android:layout_width="64dp"
             android:layout_height="46dp"
             android:layout_marginStart="8dp"
             android:onClick="scan"
-            android:text="SCAN"
+            android:text="@string/scan"
             android:textSize="13sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/button_ok_id"
             app:layout_constraintStart_toEndOf="@+id/button_ok_id" />
@@ -96,7 +98,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/results_scroll_view_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -119,11 +121,11 @@
                 android:layout_height="@dimen/label_height"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:text="..."
                 app:layout_constraintBaseline_toBaselineOf="@+id/label_isbn_id"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/label_isbn_id" />
+                app:layout_constraintStart_toEndOf="@+id/label_isbn_id"
+                tools:text="ISBN value" />
 
             <TextView
                 android:id="@+id/label_isbn_id"
@@ -164,11 +166,11 @@
                 android:layout_height="@dimen/label_height"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:text="..."
                 app:layout_constraintBaseline_toBaselineOf="@+id/label_author_id"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/label_author_id" />
+                app:layout_constraintStart_toEndOf="@+id/label_author_id"
+                tools:text="author value" />
 
             <TextView
                 android:id="@+id/label_title_id"
@@ -198,11 +200,11 @@
                 android:layout_height="@dimen/label_height"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:text="..."
                 app:layout_constraintBaseline_toBaselineOf="@+id/label_title_id"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/label_title_id" />
+                app:layout_constraintStart_toEndOf="@+id/label_title_id"
+                tools:text="title value" />
 
             <TextView
                 android:id="@+id/value_publisher_id"
@@ -210,11 +212,11 @@
                 android:layout_height="@dimen/label_height"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:text="..."
                 app:layout_constraintBaseline_toBaselineOf="@+id/label_publisher_id"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/label_publisher_id" />
+                app:layout_constraintStart_toEndOf="@+id/label_publisher_id"
+                tools:text="publisher value" />
 
             <TextView
                 android:id="@+id/value_source_url_id"
@@ -223,11 +225,11 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:autoLink="web"
-                android:text="..."
                 app:layout_constraintBaseline_toBaselineOf="@+id/label_source_url_id"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/label_source_url_id" />
+                app:layout_constraintStart_toEndOf="@+id/label_source_url_id"
+                tools:text="url value" />
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>

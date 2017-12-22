@@ -1,4 +1,4 @@
-package fraglab.net.myapplication;
+package fraglab.net.bookproject;
 
 public class BookInformation {
 
