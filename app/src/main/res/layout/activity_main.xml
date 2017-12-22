@@ -7,26 +7,28 @@
     tools:context="fraglab.net.myapplication.MainActivity">
 
     <EditText
-        android:id="@+id/isbn_text_id"
+        android:id="@+id/input_isbn_id"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
+        android:text="9789600338980"
         app:layout_constraintEnd_toStartOf="@+id/button_ok_id"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/ISBN" />
+        tools:text="9789600338980" />
 
     <Button
         android:id="@+id/button_ok_id"
         android:layout_width="70dp"
         android:layout_height="46dp"
         android:layout_marginEnd="8dp"
+        android:onClick="okClick"
         android:text="@string/ok"
-        app:layout_constraintBaseline_toBaselineOf="@+id/isbn_text_id"
+        app:layout_constraintBaseline_toBaselineOf="@+id/input_isbn_id"
         app:layout_constraintEnd_toStartOf="@+id/button_reset_id" />
 
     <Button
@@ -34,6 +36,7 @@
         android:layout_width="70dp"
         android:layout_height="46dp"
         android:layout_marginEnd="16dp"
+        android:onClick="resetClick"
         android:text="@string/reset"
         app:layout_constraintBaseline_toBaselineOf="@+id/button_ok_id"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -43,10 +46,11 @@
         android:layout_width="@dimen/label_width"
         android:layout_height="@dimen/label_height"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/label_isbn"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/isbn_text_id" />
+        app:layout_constraintTop_toBottomOf="@+id/search_progress_bar_id" />
 
     <TextView
         android:id="@+id/label_title_id"
@@ -55,6 +59,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/label_title"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label_isbn_id" />
 
@@ -81,5 +86,87 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/label_title_id" />
+
+    <TextView
+        android:id="@+id/label_author_id"
+        android:layout_width="@dimen/label_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_author"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_title_id" />
+
+    <TextView
+        android:id="@+id/label_publisher_id"
+        android:layout_width="@dimen/label_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_publisher"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_author_id" />
+
+    <TextView
+        android:id="@+id/label_source_url_id"
+        android:layout_width="@dimen/label_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_source_url"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_publisher_id" />
+
+    <TextView
+        android:id="@+id/value_author_id"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/label_height"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="..."
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_author_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/label_author_id" />
+
+    <TextView
+        android:id="@+id/value_publisher_id"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/label_height"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="..."
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_publisher_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/label_publisher_id" />
+
+    <TextView
+        android:id="@+id/value_source_url_id"
+        android:layout_width="305dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="..."
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_source_url_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/label_source_url_id" />
+
+    <ProgressBar
+        android:id="@+id/search_progress_bar_id"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_isbn_id" />
 
 </android.support.constraint.ConstraintLayout>

@@ -5,4 +5,7 @@
     <string name="reset">Reset</string>
     <string name="label_title">Title</string>
     <string name="label_isbn">ISBN</string>
+    <string name="label_author" >Author</string>
+    <string name="label_publisher">Publisher</string>
+    <string name="label_source_url">URL</string>
 </resources>
