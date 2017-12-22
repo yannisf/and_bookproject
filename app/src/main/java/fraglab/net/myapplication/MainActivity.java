@@ -50,10 +50,46 @@ public class MainActivity extends AppCompatActivity {
         bindText(R.id.value_source_url_id, "");
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        TextView isbnTextView = findViewById(R.id.value_isbn_id);
+        TextView titleTextView = findViewById(R.id.value_title_id);
+        TextView authorTextView = findViewById(R.id.value_author_id);
+        TextView publisherTextView = findViewById(R.id.value_publisher_id);
+        TextView sourceUrlTextView = findViewById(R.id.value_source_url_id);
+        savedInstanceState.putCharSequence("isbn", isbnTextView.getText());
+        savedInstanceState.putCharSequence("author", authorTextView.getText());
+        savedInstanceState.putCharSequence("title", titleTextView.getText());
+        savedInstanceState.putCharSequence("publisher", publisherTextView.getText());
+        savedInstanceState.putCharSequence("sourceUrl", sourceUrlTextView.getText());
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        CharSequence isbn = savedInstanceState.getCharSequence("isbn");
+        TextView isbnTextView = findViewById(R.id.value_isbn_id);
+        isbnTextView.setText(isbn);
+        CharSequence title = savedInstanceState.getCharSequence("title");
+        TextView titleTextView = findViewById(R.id.value_title_id);
+        titleTextView.setText(title);
+        CharSequence author = savedInstanceState.getCharSequence("author");
+        TextView authorTextView = findViewById(R.id.value_author_id);
+        authorTextView.setText(author);
+        CharSequence publisher = savedInstanceState.getCharSequence("publisher");
+        TextView publisherTextView = findViewById(R.id.value_publisher_id);
+        publisherTextView.setText(publisher);
+        CharSequence sourceUrl = savedInstanceState.getCharSequence("sourceUrl");
+        TextView soureUrlTextView = findViewById(R.id.value_source_url_id);
+        soureUrlTextView.setText(sourceUrl);
+    }
+
+
     private class HttpRequestTask extends AsyncTask<String, Void, BookInformation> {
 
         @Override
-        protected BookInformation doInBackground(String...params) {
+        protected BookInformation doInBackground(String... params) {
             try {
                 final String url = String.format("http://192.168.1.19:8080/bookproject/search?isbn=%s", params[0]);
                 RestTemplate restTemplate = new RestTemplate();

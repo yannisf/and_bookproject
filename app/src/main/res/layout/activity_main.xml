@@ -150,6 +150,7 @@
         android:layout_height="18dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:autoLink="web"
         android:text="..."
         app:layout_constraintBaseline_toBaselineOf="@+id/label_source_url_id"
         app:layout_constraintEnd_toEndOf="parent"
