@@ -2,23 +2,42 @@ package fraglab.net.bookproject;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
+import org.apache.commons.validator.routines.ISBNValidator;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import fraglab.net.bookproject.zxing.IntentIntegrator;
 import fraglab.net.bookproject.zxing.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Map<ResultField, TextView> resultTextViewMap;
+    private ProgressBar progressBar;
+
+    private Map<ResultField, TextView> initializeResultTextViewMap() {
+        Map<ResultField, TextView> map = new HashMap<>();
+        map.put(ResultField.ISBN, (TextView) findViewById(ResultField.ISBN.id));
+        map.put(ResultField.AUTHOR, (TextView) findViewById(ResultField.AUTHOR.id));
+        map.put(ResultField.TITLE, (TextView) findViewById(ResultField.TITLE.id));
+        map.put(ResultField.PUBLISHER, (TextView) findViewById(ResultField.PUBLISHER.id));
+        map.put(ResultField.SOURCE_URL, (TextView) findViewById(ResultField.SOURCE_URL.id));
+        return map;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +45,69 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void okClick(View view) {
-        EditText isbnEdit = findViewById(R.id.input_isbn_id);
-        String isbn = isbnEdit.getText().toString();
-        setProgressBarVisibility(View.VISIBLE);
-        hideKeyboard(view);
-        new HttpRequestTask().execute(isbn);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        resultTextViewMap = initializeResultTextViewMap();
+        progressBar = findViewById(R.id.search_progress_bar_id);
+        final EditText isbnEdit = findViewById(R.id.input_isbn_id);
+        isbnEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                ColorStateList colorStateList = ColorStateList.valueOf(color);
+//                ViewCompat.getBackgroundTintList(isbnEdit);
+//                ViewCompat.setBackgroundTintList(editText, colorStateList);
+
+                String isbn = s.toString();
+                if (ISBNValidator.getInstance().isValid(isbn)) {
+                    isbnEdit.setTextColor(Color.GREEN);
+                } else {
+                    isbnEdit.setTextColor(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
-    private void setProgressBarVisibility(int visible) {
-        ProgressBar progressBar = findViewById(R.id.search_progress_bar_id);
-        progressBar.setVisibility(visible);
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        for (Map.Entry<ResultField, TextView> entry : resultTextViewMap.entrySet()) {
+            savedInstanceState.putCharSequence(entry.getKey().name(), entry.getValue().getText());
+        }
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        for (Map.Entry<ResultField, TextView> entry : resultTextViewMap.entrySet()) {
+            CharSequence text = savedInstanceState.getCharSequence(entry.getKey().name());
+            entry.getValue().setText(text);
+        }
+    }
+
+    public void okClick(View view) {
+        String isbn = getInputIsbn();
+        hideKeyboard(view);
+        new HttpRequestTask(resultTextViewMap, progressBar).execute(isbn);
+    }
+
+    @NonNull
+    private String getInputIsbn() {
+        EditText isbnEdit = findViewById(R.id.input_isbn_id);
+        return isbnEdit.getText().toString();
+    }
+
+    private void setInputIsbn(String inputIsbn) {
+        EditText isbnEdit = findViewById(R.id.input_isbn_id);
+        isbnEdit.setText(inputIsbn);
     }
 
     private void hideKeyboard(View view) {
@@ -45,83 +116,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void resetClick(View view) {
-        setProgressBarVisibility(View.INVISIBLE);
-        EditText isbnEdit = findViewById(R.id.input_isbn_id);
-        isbnEdit.setText("");
-        bindText(R.id.value_isbn_id, "");
-        bindText(R.id.value_title_id, "");
-        bindText(R.id.value_author_id, "");
-        bindText(R.id.value_publisher_id, "");
-        bindText(R.id.value_source_url_id, "");
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        TextView isbnTextView = findViewById(R.id.value_isbn_id);
-        TextView titleTextView = findViewById(R.id.value_title_id);
-        TextView authorTextView = findViewById(R.id.value_author_id);
-        TextView publisherTextView = findViewById(R.id.value_publisher_id);
-        TextView sourceUrlTextView = findViewById(R.id.value_source_url_id);
-        savedInstanceState.putCharSequence("isbn", isbnTextView.getText());
-        savedInstanceState.putCharSequence("author", authorTextView.getText());
-        savedInstanceState.putCharSequence("title", titleTextView.getText());
-        savedInstanceState.putCharSequence("publisher", publisherTextView.getText());
-        savedInstanceState.putCharSequence("sourceUrl", sourceUrlTextView.getText());
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        CharSequence isbn = savedInstanceState.getCharSequence("isbn");
-        TextView isbnTextView = findViewById(R.id.value_isbn_id);
-        isbnTextView.setText(isbn);
-        CharSequence title = savedInstanceState.getCharSequence("title");
-        TextView titleTextView = findViewById(R.id.value_title_id);
-        titleTextView.setText(title);
-        CharSequence author = savedInstanceState.getCharSequence("author");
-        TextView authorTextView = findViewById(R.id.value_author_id);
-        authorTextView.setText(author);
-        CharSequence publisher = savedInstanceState.getCharSequence("publisher");
-        TextView publisherTextView = findViewById(R.id.value_publisher_id);
-        publisherTextView.setText(publisher);
-        CharSequence sourceUrl = savedInstanceState.getCharSequence("sourceUrl");
-        TextView soureUrlTextView = findViewById(R.id.value_source_url_id);
-        soureUrlTextView.setText(sourceUrl);
-    }
-
-
-    private class HttpRequestTask extends AsyncTask<String, Void, BookInformation> {
-
-        @Override
-        protected BookInformation doInBackground(String... params) {
-            try {
-                final String url = String.format("http://192.168.1.19:8080/bookproject/search?isbn=%s&provider=biblionet", params[0]);
-                RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                return restTemplate.getForObject(url, BookInformation.class);
-            } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
-            }
-
-            return new BookInformation();
+        progressBar.setVisibility(View.INVISIBLE);
+        setInputIsbn("");
+        for (Map.Entry<ResultField, TextView> entry : resultTextViewMap.entrySet()) {
+            entry.getValue().setText("");
         }
-
-        @Override
-        protected void onPostExecute(BookInformation bookInformation) {
-            setProgressBarVisibility(View.INVISIBLE);
-            bindText(R.id.value_isbn_id, bookInformation.getIsbn());
-            bindText(R.id.value_title_id, bookInformation.getTitle());
-            bindText(R.id.value_author_id, bookInformation.getAuthor());
-            bindText(R.id.value_publisher_id, bookInformation.getPublisher());
-            bindText(R.id.value_source_url_id, bookInformation.getSourceUrl());
-        }
-
-    }
-
-    private void bindText(int id, String text) {
-        TextView textView = findViewById(id);
-        textView.setText(text);
     }
 
     public void scan(View v) {

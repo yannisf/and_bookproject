@@ -9,4 +9,9 @@
     <string name="label_publisher">Publisher</string>
     <string name="label_source_url">URL</string>
     <string name="scan">Scan</string>
+    <string name="scheme">http</string>
+    <string name="host">192.168.1.19</string>
+    <string name="port">8080</string>
+    <string name="context_path">bookproject</string>
+    <string name="default_provider">biblionet</string>
 </resources>
